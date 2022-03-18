@@ -1,0 +1,33 @@
+:root {
+    --primary-color: #6C3483;
+    --secondary-color: #80F0C0;
+    --tertiary-color: #FFDF00;
+}
+
+body {
+    background-color: var(--secondary-color);
+    font-family: Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+h1 a {
+    color: var(--tertiary-color);
+    background-color: var(--primary-color);
+    text-decoration: none;
+    font-size: 50px;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+main {
+    list-style: none;
+}
+
+button {
+    margin: 40px;
+    text-decoration: none;
+}
