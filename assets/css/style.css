@@ -27,6 +27,26 @@ main {
     list-style: none;
 }
 
+ul {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-content: stretch;
+    align-items: center;
+    justify-content: space-between;
+    /* padding-top: 50px; */
+    font-size: 35px;
+    color: var(--tertiary-color);
+}
+
+ul li {
+background-color: var(--primary-color);
+    margin: 20px;
+    padding: 15px;
+    border-radius: 20px;
+    list-style: none;
+}
+
 button {
     margin: 40px;
     text-decoration: none;

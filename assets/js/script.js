@@ -39,6 +39,9 @@ var quizArea = document.querySelector("#quiz")
 var quizOption = document.querySelector("#options")
 var questionI = 0
 var qList = document.createElement("ul")
+var questionInd = document.createElement("h2")
+
+
 
 timer.textContent = "Time Remaining: " + timeRemaining
 
@@ -57,16 +60,21 @@ startQuiz.addEventListener("click", function() {
 
 var quiz = function() {
     quizArea.innerHTML = ""
-
+    quizArea.appendChild(questionInd)
     for (i = 0; i < questions.length; i++) {
         var currentQuestion = questions[questionI].question
         var currentOptions = questions[questionI].options
-        quizArea.textContent = currentQuestion
+        questionInd.textContent = currentQuestion
     }    
     currentOptions.forEach(function (newQ) {
         var qListItem = document.createElement("li")
         qListItem.textContent = newQ
         quizArea.appendChild(qList)
         qList.appendChild(qListItem)
+        qListItem.addEventListener("click", validate)
     })
+}
+
+function validate(event) {
+
 }
