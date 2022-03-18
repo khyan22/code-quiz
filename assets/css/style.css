@@ -23,8 +23,47 @@ h1 a {
     border-radius: 30px;
 }
 
+h1 a:hover {
+    background-color: var(--tertiary-color);
+    color: var(--primary-color);
+    border-radius: 30px;
+    cursor: pointer;
+}
+
 main {
-    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#start-quiz {
+    
+}
+
+h2 {
+    background-color: var(--tertiary-color);
+    color: var(--primary-color);
+    text-align: center;
+    padding: 30px;
+    font-size: 45px;
+    border-radius: 40px;
+}
+
+#timer {
+    display: flex;
+    margin: 20px;
+    font-size: 20px;
+    border-color: var(--primary-color);
+    border: 5px double var(--primary-color);
+    width: 190px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    color: #ff1493;
+    border-radius: 100px;
 }
 
 ul {
@@ -35,16 +74,23 @@ ul {
     align-items: center;
     justify-content: space-between;
     /* padding-top: 50px; */
-    font-size: 35px;
+    font-size: 30px;
     color: var(--tertiary-color);
 }
 
 ul li {
-background-color: var(--primary-color);
+    background-color: var(--primary-color);
     margin: 20px;
     padding: 15px;
     border-radius: 20px;
     list-style: none;
+    cursor: pointer;
+}
+
+ul li:hover {
+    background-color: var(--tertiary-color);
+    color: var(--primary-color);
+    border-radius: 20px;
 }
 
 button {

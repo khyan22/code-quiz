@@ -40,7 +40,7 @@ var quizOption = document.querySelector("#options")
 var questionI = 0
 var qList = document.createElement("ul")
 var questionInd = document.createElement("h2")
-
+var timeDeduct = 5
 
 
 timer.textContent = "Time Remaining: " + timeRemaining
@@ -52,6 +52,7 @@ startQuiz.addEventListener("click", function() {
         timer.textContent = "Time Remaining: " + timeRemaining
         } else {
             clearInterval
+            endQuiz()
         }
     }, 1000)
 
@@ -76,5 +77,88 @@ var quiz = function() {
 }
 
 function validate(event) {
+    var element = event.target 
+    
+    if (element.matches("li")) {
+        var result = document.createElement("div")
+        result.setAttribute("id", "result")
+        if (element.textContent == question[questionI].answer) {
+            result.textContent = "Correct! The correct answer is: " + question[questionI].answer 
+        } else {
+            timeRemaining = timeRemaining - timeDeduct
+            result.textContent = "Wrong! The correct answer is: " + question[questionI.answer]
+        }
+    }
 
+
+    questionI++
+
+    if (questionI < question.length) {
+        quiz(questionI)
+    } else {
+        endQuiz()
+        result.textContent = "The quiz is done! You finished with " + timeRemaining + " second remaining"
+    }
+    quizArea.appendChild(result)
+}
+
+function endQuiz() {
+    quizArea.innerHTML = ""
+
+    var createH2 = document.createElement("h2")
+    createH2.setAttribute("id", "createH1")
+    createH2.textContent = "Congratulations! You've finished!"
+
+    quizArea.appendChild(createH2)
+
+    var creatP = document.createElement("p")
+    createP.setAttribute("createP")
+
+    quizArea.appendChild(createP)
+
+    if (timeRemaining > 0) {
+        clearInterval()
+    }
+    createLabel = document.createElement("label")
+    createLabel.setAttribute("id", "createLabel")
+    createLabel.textContent = "Enter your initials"
+
+    quizArea.appendChild(createLabel)
+
+    var createInput = document.createElement("input")
+    createInput.setAttribute("type", "text")
+    createInput.setAttribute("id", "initial")
+    createInput.textContent = ""
+
+    quizArea.appendChild(createInput)
+
+    var createSubmit = document.createElement("button")
+    createSubmit.setAttribute("type", "submit")
+    createSubmit.setAttribute("id", "submit")
+    createSubmit.textContent = "Submit"
+
+    quizArea.appendChild(createSubmit)
+
+    createSubmit.addEventListener("click", function() {
+        var initials = createInput.value
+
+        while(initial === null) {
+            alert("You need to enter you're initial")
+            var initials = createInput.value
+        }
+        var finalScore = {
+            initials: initials,
+            score: timeRemaining
+        }
+
+        var allScores = localStorage.getItem(allScores)
+        if (allScores === null) {
+            allScores = []
+        } else {
+            allScores = JSON.parse(allScores)
+        }
+        allScores.push(finalScore)
+        var newScore = JSON.stringify(allScores)
+        localStorage.setItem("allScores", newScore)
+    })
 }
