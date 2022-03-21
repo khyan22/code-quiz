@@ -18,16 +18,15 @@ var questions = [
 
     },
     {
-        question:"What would be console logged if the input variable was set to zero?",
-        options: ["one","two","one and two","two and three"],
-        answer: "one and two"
+        question: "What do media queries allow us to do?",
+        options: ["Play videos on our page"," Create responsive designs","Change css at different browser widths","Do nothing"],
+        answer: "Change css at different browser widths"
 
     },
     {
-        question:"Which variable(s) are considered global?",
-        options: ["input","input and sum","sum","sum and num"],
-        answer: " input"
-
+        question: "Which one of these is NOT a valid media type for media queries?",
+        options: ["All","Screen","Tablet","Speech"],
+        answer: "Tablet"
     },
 ]
 
@@ -36,36 +35,43 @@ var timer = document.querySelector("#timer");
 var timeRemaining = 75
 var startQuiz = document.querySelector("#start-quiz")
 var quizArea = document.querySelector("#quiz")
-var quizOption = document.querySelector("#options")
 var questionI = 0
 var qList = document.createElement("ul")
-var questionInd = document.createElement("h2")
-var timeDeduct = 5
+var timeDeduct = 15
+var currentQ = document.createElement("h2")
+var scoreDisplay = document.querySelector("#highScore")
+var highScore = localStorage.getItem("highScore")
+var initials = localStorage.getItem("initials")
 
+if (highScore === null && initials === null) {
+    scoreDisplay.textContent = "No High Score Data"
+} else {
+    scoreDisplay.textContent = initials + " has the high score of " + highScore
+}
 
 timer.textContent = "Time Remaining: " + timeRemaining
 
 startQuiz.addEventListener("click", function() { 
     setInterval( function() {
-        if (timeRemaining > 0) {
+        if (timeRemaining > 0 && (questionI <questions.length)) {
         timeRemaining--
         timer.textContent = "Time Remaining: " + timeRemaining
         } else {
-            clearInterval
-            endQuiz()
+            clearInterval()
         }
     }, 1000)
-
     quiz()
 })
 
 var quiz = function() {
     quizArea.innerHTML = ""
-    quizArea.appendChild(questionInd)
+    qList.innerHTML = ""
+
     for (i = 0; i < questions.length; i++) {
         var currentQuestion = questions[questionI].question
         var currentOptions = questions[questionI].options
-        questionInd.textContent = currentQuestion
+        quizArea.appendChild(currentQ)
+        currentQ.textContent = currentQuestion
     }    
     currentOptions.forEach(function (newQ) {
         var qListItem = document.createElement("li")
@@ -82,22 +88,21 @@ function validate(event) {
     if (element.matches("li")) {
         var result = document.createElement("div")
         result.setAttribute("id", "result")
-        if (element.textContent == question[questionI].answer) {
-            result.textContent = "Correct! The correct answer is: " + question[questionI].answer 
+        if (element.textContent == questions[questionI].answer) {
+            result.textContent = "Correct! The correct answer is: " + questions[questionI].answer 
         } else {
             timeRemaining = timeRemaining - timeDeduct
-            result.textContent = "Wrong! The correct answer is: " + question[questionI.answer]
+            result.textContent = "Wrong! The correct answer is: " + questions[questionI].answer
         }
     }
 
 
     questionI++
 
-    if (questionI < question.length) {
+    if (questionI < questions.length) {
         quiz(questionI)
     } else {
         endQuiz()
-        result.textContent = "The quiz is done! You finished with " + timeRemaining + " second remaining"
     }
     quizArea.appendChild(result)
 }
@@ -106,19 +111,17 @@ function endQuiz() {
     quizArea.innerHTML = ""
 
     var createH2 = document.createElement("h2")
-    createH2.setAttribute("id", "createH1")
+    createH2.setAttribute("id", "createH2")
     createH2.textContent = "Congratulations! You've finished!"
 
     quizArea.appendChild(createH2)
 
-    var creatP = document.createElement("p")
-    createP.setAttribute("createP")
+    var createP = document.createElement("p")
+    createP.setAttribute("id", "createP")
+    createP.textContent = "The quiz is done! You finished with " + timeRemaining + " seconds remaining"
 
     quizArea.appendChild(createP)
 
-    if (timeRemaining > 0) {
-        clearInterval()
-    }
     createLabel = document.createElement("label")
     createLabel.setAttribute("id", "createLabel")
     createLabel.textContent = "Enter your initials"
@@ -142,23 +145,19 @@ function endQuiz() {
     createSubmit.addEventListener("click", function() {
         var initials = createInput.value
 
-        while(initial === null) {
-            alert("You need to enter you're initial")
+        if (initials === null) {
+            alert("Please enter you're initials!")
             var initials = createInput.value
         }
-        var finalScore = {
-            initials: initials,
-            score: timeRemaining
+
+        if (highScore === null) {
+            highScore = 0
         }
 
-        var allScores = localStorage.getItem(allScores)
-        if (allScores === null) {
-            allScores = []
-        } else {
-            allScores = JSON.parse(allScores)
+        if (timeRemaining > highScore) {
+            localStorage.setItem("highScore", timeRemaining)
+            localStorage.setItem("initials", initials)
         }
-        allScores.push(finalScore)
-        var newScore = JSON.stringify(allScores)
-        localStorage.setItem("allScores", newScore)
+            
     })
 }
