@@ -52,12 +52,13 @@ if (highScore === null && initials === null) {
 timer.textContent = "Time Remaining: " + timeRemaining
 
 startQuiz.addEventListener("click", function() { 
-    setInterval( function() {
-        if (timeRemaining > 0 && (questionI <questions.length)) {
+    var quizTimer = setInterval ( function() {
+        if (timeRemaining > 0 && (questionI < questions.length)) {
         timeRemaining--
         timer.textContent = "Time Remaining: " + timeRemaining
         } else {
-            clearInterval()
+            clearInterval(quizTimer)
+            endQuiz()
         }
     }, 1000)
     quiz()
@@ -101,8 +102,6 @@ function validate(event) {
 
     if (questionI < questions.length) {
         quiz(questionI)
-    } else {
-        endQuiz()
     }
     quizArea.appendChild(result)
 }
@@ -157,6 +156,8 @@ function endQuiz() {
         if (timeRemaining > highScore) {
             localStorage.setItem("highScore", timeRemaining)
             localStorage.setItem("initials", initials)
+        } else {
+            createP.textContent = "You didn't beat you're high score. Try again!"
         }
             
     })

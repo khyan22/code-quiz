@@ -77,7 +77,7 @@ h2 {
 
 ul {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex-direction: row;
     align-content: stretch;
     align-items: center;
@@ -118,4 +118,11 @@ ul li:hover {
 button {
     margin: 40px;
     text-decoration: none;
+}
+
+@media screen and (max-width: 1000px) {
+    ul {
+        flex-direction: column;
+
+    }
 }
