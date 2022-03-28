@@ -1,3 +1,4 @@
+# Code Quiz
 ## Summary
 
 The Purpose of this application is to provide a short coding quiz made up of 5 question with 4 choices and one answer. At the end of the quiz you are given the time you have remaining and the option to enter your initials and save your high score which upon refresh will be displayed towards the top of the page.
